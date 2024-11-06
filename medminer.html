@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700&family=Saira+Condensed:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      html {
+        height: 100%;
+        font-family: "Saira Condensed", sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      .login-container {
+        background-color: rgba(166, 218, 206, 0.8);
+        width: 400px;
+        height: 550px;
+        padding: 2rem;
+        border-radius: 10px;
+        border: 1px solid rgba(20, 102, 114, 1);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+      }
+
+      .login-heading {
+        font-size: 128px;
+        font-weight: 700;
+        line-height: 1;
+        color: rgba(55, 126, 130, 1);
+        margin-bottom: 0.5rem;
+      }
+
+      .social-text {
+        font-family: "Saira Condensed", sans-serif;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 31.48px;
+        text-align: left;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .social-buttons .btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+
+      .social-buttons img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .form-control {
+        width: 100%;
+        height: 50px;
+        margin-top: 10px;
+        border: 1px solid rgba(20, 102, 114, 0.4);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+      }
+
+      .forgot-password {
+        font-size: 0.8rem;
+        color: #377e82;
+        text-decoration: none;
+        align-self: flex-start;
+      }
+
+      .sign-in-btn {
+        padding: 0.7rem;
+        background-color: #377e82;
+        color: #fbf9cb;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .sign-up {
+        display: block;
+        margin-top: 1rem;
+        font-size: 0.8rem;
+        color: #377e82;
+        text-decoration: none;
+      }
+
+      .signup-container {
+        display: none;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Saira Condensed", sans-serif;
+      }
+
+      .signup-container h2 {
+        font-weight: 700;
+        line-height: 1;
+        color: rgba(55, 126, 130, 1);
+        margin-bottom: 20px;
+      }
+
+      .signup-container input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid rgba(20, 102, 114, 0.4);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      }
+
+      .signup-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #377e82;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .signup-container button:hover {
+        background-color: #31b0d5;
+      }
+
+      .signup-container .close-signup {
+        margin-top: 10px;
+        display: block;
+        color: #d9534f;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="d-flex justify-content-center align-items-center">
+    <div class="login-container">
+      <h2 class="login-heading text-center">LOG IN</h2>
+      <p class="social-text">Log in using social network</p>
+
+      <div class="social-buttons d-flex justify-content-center mb-3">
+        <button class="btn btn-light mr-2">
+          <img src="path/to/facebook-icon.png" alt="Facebook" />
+        </button>
+        <button class="btn btn-light mr-2">
+          <img src="path/to/google-icon.png" alt="Google" />
+        </button>
+        <button class="btn btn-light">
+          <img src="path/to/twitter-icon.png" alt="Twitter" />
+        </button>
+      </div>
+
+      <input type="text" class="form-control" placeholder="Username" />
+      <input type="password" class="form-control" placeholder="Password" />
+      <a href="#" class="forgot-password">forgot password</a>
+      <button type="submit" class="sign-in-btn">SIGN IN</button>
+      <span class="signup-link">Sign Up</span>
+    </div>
+
+    <div class="signup-container">
+      <h2>SIGN UP</h2>
+      <input type="text" placeholder="Username" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button>Sign Up</button>
+      <span class="close-signup">Close</span>
+    </div>
+
+    <script>
+      const signupLink = document.querySelector(".signup-link");
+      const signupContainer = document.querySelector(".signup-container");
+      const closeSignup = document.querySelector(".close-signup");
+
+      signupLink.addEventListener("click", () => {
+        signupContainer.style.display = "block";
+      });
+
+      closeSignup.addEventListener("click", () => {
+        signupContainer.style.display = "none";
+      });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
