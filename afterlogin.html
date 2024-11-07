@@ -21,6 +21,7 @@
       }
       .header {
         border-radius: 10px;
+        margin: top 10px; ;
         padding: 20px;
         display: flex;
         font-weight: 700;
@@ -32,13 +33,20 @@
       }
       .header h1 {
         color: #ffffff;
-        font-weight: 700;
+        font-weight: 1000;
+        letter-spacing: 2px;
         font-family: "Saira Condensed", sans-serif;
       }
       .nav-link {
         color: #f8e37e;
         font-family: "Saira Condensed", sans-serif;
         margin-right: 10px;
+        font-size: 25px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        padding: 10px;
+        background-color: #ffffff;  
+        border-radius: 30px;
       }
       .nav-link.active {
         color: #f8e37e;
@@ -47,8 +55,9 @@
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
+        font-size: 15px;
         margin-top: 20px;
-        justify-content: flex-start;
+        justify-content: start;
       }
       .card {
         background-color: #ffffff;
@@ -57,27 +66,74 @@
         flex: 1;
         min-width: 250px;
       }
-      .expiry-dates h2,
-      .reminders h2,
-      .schedule h2 {
-        color: #13616c;
+      .med-expiry {
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 10px;
+        font-family: "Saira Condensed", sans-serif;
+        color: #333;
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
-      .expiry-dates h3 {
-        color: #f8e37e;
-        font-size: 3em;
+      .med-expiry h1 {
+        font-size: 24px;
+        margin: 0;
+        font-weight: bold;
+        color: #146672;
+      }
+      .med-expiry h2 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #F8E37E;
+        margin: 5px 0;
+      }
+      .date-container {
+        background-color: #146672;
+        color: white;
+        text-align: center;
+        font-family: "Saira Condensed", sans-serif;
+        border-radius: 8px;
+        padding: 10px 20px;
+        margin-top: 15px;
+        width: auto;
+      }
+      .date-container .month {
+        font-size: 14px;
+        font-weight: bold;
+        font-family: "Saira Condensed", sans-serif;
+        margin-bottom: 5px;
+      }
+      .date-container .day {
+        font-size: 48px;
+        font-weight: bold;
+      }
+      .reminders h2 {
+        font-size: 24px;
+        color: #146672;
+        font-weight: bold;
       }
       .reminders p {
         margin: 0;
         color: #13616c;
       }
       .schedule {
-        margin-top: 0;
+        margin-top: -5px;
         background-color: transparent;
-        margin-left: 20px;
-        padding: 20px;
-        border-radius: 0px;
+        margin-left: 5px;
+        font-weight: bold;
+        font-family: "Saira Condensed", sans-serif;
         border: none;
         flex: 1;
+      }
+
+      .schedule h2 {
+        font-size: 50px;
+        color: #F8E37E;
+        font-weight: bold;
+        font-family: "Saira Condensed", sans-serif;
       }
       .schedule-item {
         display: flex;
@@ -86,19 +142,22 @@
         margin: 10px 0;
         padding: 10px;
         background-color: #146672;
-        color: white;
+        color: #ffffff;
+        font-family: "Saira Condensed", sans-serif;
         border-radius: 5px;
+        font-weight: bold;
         cursor: pointer;
       }
       .schedule-item.checked {
-        background-color: #66a5ad;
+        background-color: #146672;
       }
       .schedule-item input[type="text"],
       .schedule-item input[type="time"] {
         background-color: #146672;
         border: none;
         color: white;
-        font-size: 1em;
+        font-family: "Saira Condensed", sans-serif;
+        font-weight: bold;
         max-width: 100px;
       }
       .schedule-item input[type="text"]:focus,
@@ -146,6 +205,12 @@
     <script>
       function toggleCheck(element) {
         element.classList.toggle("checked");
+        const status = element.querySelector(".status");
+        if (element.classList.contains("checked")) {
+          status.textContent = "✔";
+        } else {
+          status.textContent = "Taken";
+        }
       }
     </script>
   </head>
@@ -157,17 +222,23 @@
           <h1 class="ms-3">Med Minder</h1>
         </div>
         <nav class="nav">
-          <a href="#" class="nav-item nav-link active">Home</a>
-          <a href="#" class="nav-item nav-link">Inventory</a>
-          <a href="#" class="nav-item nav-link">Health Log</a>
+          <a href="#" class="nav-item nav-link active">HOME</a>
+          <a href="#" class="nav-item nav-link">INVENTORY</a>
+          <a href="#" class="nav-item nav-link">HEALTH LOG</a>
         </nav>
       </div>
 
       <div class="content">
-        <div class="card expiry-dates">
-          <h2>Medicine Expiry Dates</h2>
-          <h3>November 7</h3>
+        <div class="card med-expiry">
+          <h1>MEDICINE</h1>
+          <h2>EXPIRY</h2>
+          <h1>DATES</h1>
+          <div class="date-container">
+            <div class="month">NOVEMBER</div>
+            <div class="day">7</div>
+          </div>
         </div>
+
         <div class="card reminders">
           <h2>Daily Reminders</h2>
           <p>Take 1 pill of</p>
@@ -183,26 +254,26 @@
         </div>
       
         <div class="card schedule">
-          <h2>Today's Schedule</h2>
+          <h2>Today's Schedule:</h2>
           <div class="schedule-item" onclick="toggleCheck(this)">
             <input type="text" placeholder="Medicine" value="Biogesic" />
             <input type="time" value="09:00" />
-            <span>✔</span>
+            <span class="status">Taken</span>
           </div>
           <div class="schedule-item" onclick="toggleCheck(this)">
             <input type="text" placeholder="Medicine" value="Diatabs" />
             <input type="time" value="09:00" />
-            <span>✔</span>
+            <span class="status">Taken</span>
           </div>
           <div class="schedule-item" onclick="toggleCheck(this)">
             <input type="text" placeholder="Medicine" value="Cetirizine" />
             <input type="time" value="19:00" />
-            <span>✔</span>
+            <span class="status">Taken</span>
           </div>
           <div class="schedule-item" onclick="toggleCheck(this)">
             <input type="text" placeholder="Medicine" value="Vitamins" />
             <input type="time" value="19:00" />
-            <span>✔</span>
+            <span class="status">Taken</span>
           </div>
         </div>
       </div>
