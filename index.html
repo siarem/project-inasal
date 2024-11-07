@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700&family=Saira+Condensed:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      html {
+        height: 100%;
+        font-family: "Saira Condensed", sans-serif;
+        background-image: url("background.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .login-container {
+        background-color: rgba(166, 218, 206, 0.8);
+        width: 400px;
+        height: 550px;
+        padding: 2rem;
+        border-radius: 10px;
+        border: 1px solid rgba(20, 102, 114, 1);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+      }
+
+      .login-heading {
+        font-size: 128px;
+        font-weight: 700;
+        line-height: 1;
+        color: #377e82;
+        margin-bottom: 0.5rem;
+      }
+
+      .social-text {
+        font-family: "Saira Condensed", sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 31.48px;
+        text-align: left;
+        margin-bottom: 1rem;
+        color: #377e82;
+      }
+
+      .form-control {
+        width: 100%;
+        height: 50px;
+        margin-top: 10px;
+        border: 1px solid rgba(20, 102, 114, 0.4);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+      }
+
+      .sign-in-btn {
+        padding: 0.7rem;
+        background-color: #377e82;
+        color: #fbf9cb;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .signup-container {
+        display: none;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Saira Condensed", sans-serif;
+      }
+
+      .signup-container h2 {
+        font-weight: 700;
+        line-height: 1;
+        color: rgba(55, 126, 130, 1);
+        margin-bottom: 20px;
+      }
+
+      .signup-container input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid rgba(20, 102, 114, 0.4);
+      }
+
+      .signup-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #377e82;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="d-flex justify-content-center align-items-center">
+    <div class="login-container">
+      <h2 class="login-heading text-center">LOG IN</h2>
+      <form action="login.php" method="POST">
+        <input type="text" class="form-control" placeholder="Username" name="username" required />
+        <input type="password" class="form-control" placeholder="Password" name="password" required />
+        <button type="submit" class="sign-in-btn">SIGN IN</button>
+      </form>
+      <span class="signup-link">Sign Up</span>
+    </div>
+
+    <div class="signup-container">
+      <h2>SIGN UP</h2>
+      <form action="submit.php" method="POST">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Sign Up</button>
+      </form>
+      <span class="close-signup">Close</span>
+    </div>
+
+    <script>
+      document.querySelector(".signup-link").addEventListener("click", () => {
+        document.querySelector(".signup-container").style.display = "block";
+      });
+      document.querySelector(".close-signup").addEventListener("click", () => {
+        document.querySelector(".signup-container").style.display = "none";
+      });
+    </script>
+  </body>
+</html>

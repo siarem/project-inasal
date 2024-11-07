@@ -21,7 +21,7 @@
       }
       .header {
         border-radius: 10px;
-        margin: top 10px; ;
+        margin-top: 10px;
         padding: 20px;
         display: flex;
         font-weight: 700;
@@ -87,7 +87,7 @@
       .med-expiry h2 {
         font-size: 24px;
         font-weight: bold;
-        color: #F8E37E;
+        color: #f8e37e;
         margin: 5px 0;
       }
       .date-container {
@@ -131,7 +131,7 @@
 
       .schedule h2 {
         font-size: 50px;
-        color: #F8E37E;
+        color: #f8e37e;
         font-weight: bold;
         font-family: "Saira Condensed", sans-serif;
       }
@@ -179,30 +179,26 @@
         align-items: center;
         height: 150px;
       }
-      .box:nth-child(1) {
-        order: 1;
-        height: 150px;
-        width: 120px;
-      }
-      .box:nth-child(2) {
-        order: 3;
-        height: 150px;
-        width: 120px;
-      }
-      .box:nth-child(4) {
-        order: 4;
-        margin-right: 10px;
-        width: 500px;
-        align-items: center;
-      }
-      .box:nth-child(3) {
-        order: 2;
-        margin-right: 10px;
-        width: 500px;
-        align-items: center;
-      }
     </style>
     <script>
+      // Function to display the current date
+      function displayCurrentDate() {
+        const dateContainer = document.querySelector(".date-container");
+        const monthElement = dateContainer.querySelector(".month");
+        const dayElement = dateContainer.querySelector(".day");
+
+        const today = new Date();
+        const options = { month: "long" };
+        const month = new Intl.DateTimeFormat("en-US", options).format(today);
+        const day = today.getDate();
+
+        monthElement.textContent = month.toUpperCase();
+        dayElement.textContent = day;
+      }
+
+      // Call the function when the page loads
+      window.onload = displayCurrentDate;
+
       function toggleCheck(element) {
         element.classList.toggle("checked");
         const status = element.querySelector(".status");
@@ -234,8 +230,8 @@
           <h2>EXPIRY</h2>
           <h1>DATES</h1>
           <div class="date-container">
-            <div class="month">NOVEMBER</div>
-            <div class="day">7</div>
+            <div class="month"></div>
+            <div class="day"></div>
           </div>
         </div>
 
@@ -244,7 +240,7 @@
           <p>Take 1 pill of</p>
         </div>
       </div>
-      
+
       <div class="content">
         <div class="content2">
           <div class="box">Box 1</div>
@@ -252,7 +248,7 @@
           <div class="box">Box 2</div>
           <div class="box">Box 4</div>
         </div>
-      
+
         <div class="card schedule">
           <h2>Today's Schedule:</h2>
           <div class="schedule-item" onclick="toggleCheck(this)">
@@ -277,5 +273,6 @@
           </div>
         </div>
       </div>
+    </div>
   </body>
 </html>
