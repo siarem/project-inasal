@@ -65,6 +65,7 @@
         background-color: #ffffff;
         border-radius: 20px;
         padding: 20px;
+        border: 2px solid #146672;
         flex: 1;
         min-width: 250px;
       }
@@ -211,32 +212,92 @@
       }
       .box {
         background-color: #ffffff;
-        border-radius: 20px;
+        border: 2px solid #146672;
+        border-radius: 10px;
         padding: 20px;
+        width: auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .box h4 {
+        font-size: 18px;
+        color: #146672;
+        font-family: "Saira Condensed", sans-serif;
+      }
+
+      .medicine-list ul,
+      .upcoming-expirations ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .medicine-list li,
+      .upcoming-expirations li {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        height: 150px;
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
       }
 
-      .box1 {
-        height: 180px; /* Adjust height for Box 1 */
-        width: 180px; /* Adjust width for Box 1 */
+      .medicine-list li span,
+      .upcoming-expirations li span {
+        font-weight: bold;
       }
 
-      .box3 {
-        height: 180px; /* Adjust height for Box 2 */
-        width: 350px; /* Adjust width for Box 2 */
+      .status {
+        border-radius: 5px;
+        padding: 5px 10px;
+        color: white;
       }
 
-      .box2 {
-        height: 180px; /* Adjust height for Box 3 */
-        width: 180px; /* Adjust width for Box 3 */
+      .status.expired {
+        background-color: #f44336;
       }
 
-      .box4 {
-        height: 180px; /* Adjust height for Box 4 */
-        width: 350px; /* Adjust width for Box 4 */
+      .status.warning {
+        background-color: #ff9800;
+      }
+
+      .status.safe {
+        background-color: #4caf50;
+      }
+
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      input,
+      button {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      button {
+        background-color: #146672;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #a6dace;
+      }
+
+      .delete-btn {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      .delete-btn:hover {
+        background-color: #d32f2f;
       }
     </style>
     <script>
@@ -374,10 +435,32 @@
 
       <div class="content">
         <div class="content2">
-          <div class="box box1">Box 1</div>
-          <div class="box box3">Box 3</div>
+          <div class="box box1">
+            <h4>Upcoming Expirations</h4>
+            <ul id="upcoming-expirations-list">
+              <!-- Upcoming expirations will be added here dynamically -->
+            </ul>
+          </div>
+
+          <div class="box box3">
+            <h4>Add Medicine</h4>
+            <input type="text" id="medicine-name" placeholder="Medicine Name" />
+            <input
+              type="number"
+              id="medicine-quantity"
+              placeholder="Quantity"
+            />
+            <input type="date" id="medicine-expiry" placeholder="Expiry Date" />
+            <button onclick="addMedicine()">Add Medicine</button>
+          </div>
+
           <div class="box box2">Box 2</div>
-          <div class="box box4">Box 4</div>
+          <div class="box box4">
+            <h4>Medicine Details</h4>
+            <ul id="medicine-list">
+              <!-- Medicines will be added here dynamically -->
+            </ul>
+          </div>
         </div>
 
         <div class="task-container">
@@ -391,5 +474,115 @@
         </div>
       </div>
     </div>
+    <script>
+      const medicineList = document.getElementById("medicine-list");
+      const upcomingExpirationsList = document.getElementById(
+        "upcoming-expirations-list"
+      );
+
+      // Load medicines from localStorage
+      function loadMedicines() {
+        const medicines = JSON.parse(localStorage.getItem("medicines")) || [];
+        medicines.forEach((medicine) => addMedicineToList(medicine));
+        updateUpcomingExpirations();
+      }
+
+      // Save medicines to localStorage
+      function saveMedicines() {
+        const medicines = [];
+        medicineList.querySelectorAll("li").forEach((li) => {
+          const name = li.querySelector(".name").textContent;
+          const quantity = li.querySelector(".quantity").textContent;
+          const expiry = li.querySelector(".expiry").dataset.expiry;
+          medicines.push({ name, quantity, expiry });
+        });
+        localStorage.setItem("medicines", JSON.stringify(medicines));
+        updateUpcomingExpirations();
+      }
+
+      // Add a medicine to the list
+      function addMedicine() {
+        const name = document.getElementById("medicine-name").value;
+        const quantity = document.getElementById("medicine-quantity").value;
+        const expiryDate = document.getElementById("medicine-expiry").value;
+
+        if (!name || !quantity || !expiryDate) {
+          alert("Please fill out all fields!");
+          return;
+        }
+
+        const medicine = { name, quantity, expiry: expiryDate };
+        addMedicineToList(medicine);
+        saveMedicines();
+
+        document.getElementById("medicine-name").value = "";
+        document.getElementById("medicine-quantity").value = "";
+        document.getElementById("medicine-expiry").value = "";
+      }
+
+      // Add a medicine to the DOM
+      function addMedicineToList(medicine) {
+        const expiryDate = new Date(medicine.expiry);
+        const today = new Date();
+        const daysLeft = Math.ceil(
+          (expiryDate - today) / (1000 * 60 * 60 * 24)
+        );
+
+        let statusClass = "";
+        let statusText = "";
+
+        if (daysLeft < 0) {
+          statusClass = "expired";
+          statusText = "Expired";
+        } else if (daysLeft <= 7) {
+          statusClass = "warning";
+          statusText = "Expiring Soon";
+        } else {
+          statusClass = "safe";
+          statusText = "Safe";
+        }
+
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `
+          <span class="name">${medicine.name}</span> 
+          (<span class="quantity">${medicine.quantity}</span>)
+          <span class="expiry" data-expiry="${medicine.expiry}"> - 
+            <span class="status ${statusClass}">${statusText}</span>
+          </span>
+          <button class="delete-btn" onclick="deleteMedicine(this)">Delete</button>
+        `;
+        medicineList.appendChild(listItem);
+      }
+
+      // Delete a medicine
+      function deleteMedicine(button) {
+        const li = button.parentElement;
+        li.remove();
+        saveMedicines();
+      }
+
+      // Update the Upcoming Expirations box
+      function updateUpcomingExpirations() {
+        upcomingExpirationsList.innerHTML = ""; // Clear the list
+        const today = new Date();
+        const medicines = JSON.parse(localStorage.getItem("medicines")) || [];
+
+        medicines.forEach((medicine) => {
+          const expiryDate = new Date(medicine.expiry);
+          const daysLeft = Math.ceil(
+            (expiryDate - today) / (1000 * 60 * 60 * 24)
+          );
+
+          if (daysLeft > 0 && daysLeft <= 7) {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${medicine.name} is expiring in ${daysLeft} day(s).`;
+            upcomingExpirationsList.appendChild(listItem);
+          }
+        });
+      }
+
+      // Initialize the app
+      loadMedicines();
+    </script>
   </body>
 </html>
