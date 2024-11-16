@@ -45,11 +45,13 @@
         font-weight: 700;
         letter-spacing: 2px;
         padding: 10px;
-        background-color: #ffffff;  
+        background-color: #ffffff;
         border-radius: 30px;
+        transition: background-color 0.3s ease;
       }
       .nav-link.active {
-        color: #f8e37e;
+        background-color: #f8e37e;
+        color: #ffffff;
       }
       .content {
         display: flex;
@@ -61,7 +63,7 @@
       }
       .card {
         background-color: #ffffff;
-        border-radius: 10px;
+        border-radius: 20px;
         padding: 20px;
         flex: 1;
         min-width: 250px;
@@ -69,45 +71,51 @@
       .med-expiry {
         background-color: #ffffff;
         padding: 15px;
-        border-radius: 10px;
+        border-radius: 20px;
         font-family: "Saira Condensed", sans-serif;
         color: #333;
-        text-align: center;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        text-align: left;
+        display: grid;
+        grid-template-columns: auto auto; /* Two columns */
+        gap: 0 10px; /* Gap between columns */
+        align-items: center center;
       }
-      .med-expiry h1 {
-        font-size: 24px;
-        margin: 0;
+
+      .med-expiry h1,
+      .med-expiry h2 {
+        font-size: 50px;
         font-weight: bold;
+      }
+
+      .med-expiry h1 {
         color: #146672;
       }
+
       .med-expiry h2 {
-        font-size: 24px;
-        font-weight: bold;
         color: #f8e37e;
-        margin: 5px 0;
       }
+
       .date-container {
         background-color: #146672;
         color: white;
         text-align: center;
         font-family: "Saira Condensed", sans-serif;
-        border-radius: 8px;
-        padding: 10px 20px;
-        margin-top: 15px;
-        width: auto;
+        border-radius: 20px;
+        padding: 10px;
+        width: 200px; /* Set a fixed width for alignment */
+        display: grid;
+        grid-template-rows: auto auto;
       }
+
       .date-container .month {
-        font-size: 14px;
+        font-size: 40px;
         font-weight: bold;
         font-family: "Saira Condensed", sans-serif;
         margin-bottom: 5px;
       }
+
       .date-container .day {
-        font-size: 48px;
+        font-size: 90px;
         font-weight: bold;
       }
       .reminders h2 {
@@ -119,50 +127,77 @@
         margin: 0;
         color: #13616c;
       }
-      .schedule {
-        margin-top: -5px;
+      h2 {
+        font-size: 45px;
+        color: #146672;
+        font-weight: bold;
+      }
+      .task-container {
+        max-width: 700px;
         background-color: transparent;
-        margin-left: 5px;
-        font-weight: bold;
-        font-family: "Saira Condensed", sans-serif;
+        border-radius: 20px;
+        text-align: center;
+      }
+      .add-task-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+      .add-task-container input[type="text"] {
+        padding: 10px;
+        font-size: 18px;
+        width: 200px;
+        border: 2px solid #146672;
+        border-radius: 5px;
+      }
+      .add-task-container input[type="time"] {
+        padding: 10px;
+        font-size: 18px;
+        border: 2px solid #146672;
+        border-radius: 5px;
+      }
+      .add-task-container button {
+        background-color: #146672;
+        color: white;
         border: none;
-        flex: 1;
-      }
-
-      .schedule h2 {
-        font-size: 50px;
-        color: #f8e37e;
-        font-weight: bold;
+        padding: 10px 20px;
         font-family: "Saira Condensed", sans-serif;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
       }
-      .schedule-item {
+      h2 {
+        font-size: 45px;
+        color: #146672;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .task-list {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 20px;
+      }
+      .task-item {
+        background-color: #146672;
+        color: white;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 10px 0;
-        padding: 10px;
-        background-color: #146672;
-        color: #ffffff;
-        font-family: "Saira Condensed", sans-serif;
-        border-radius: 5px;
-        font-weight: bold;
-        cursor: pointer;
       }
-      .schedule-item.checked {
-        background-color: #146672;
+      .task-item.completed {
+        text-decoration: line-through;
+        opacity: 0.7;
       }
-      .schedule-item input[type="text"],
-      .schedule-item input[type="time"] {
-        background-color: #146672;
+      .task-item button {
+        background-color: transparent;
         border: none;
         color: white;
-        font-family: "Saira Condensed", sans-serif;
-        font-weight: bold;
-        max-width: 100px;
-      }
-      .schedule-item input[type="text"]:focus,
-      .schedule-item input[type="time"]:focus {
-        outline: none;
+        cursor: pointer;
+        font-size: 20px;
       }
       .content2 {
         display: grid;
@@ -172,12 +207,32 @@
       }
       .box {
         background-color: #ffffff;
-        border-radius: 10px;
+        border-radius: 20px;
         padding: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 150px;
+      }
+
+      .box1 {
+        height: 180px; /* Adjust height for Box 1 */
+        width: 180px; /* Adjust width for Box 1 */
+      }
+
+      .box2 {
+        height: 180px; /* Adjust height for Box 2 */
+        width: 400px; /* Adjust width for Box 2 */
+      }
+
+      .box3 {
+        height: 180px; /* Adjust height for Box 3 */
+        width: 180px; /* Adjust width for Box 3 */
+      }
+
+      .box4 {
+        height: 180px; /* Adjust height for Box 4 */
+        width: 400px; /* Adjust width for Box 4 */
       }
     </style>
     <script>
@@ -196,17 +251,87 @@
         dayElement.textContent = day;
       }
 
-      // Call the function when the page loads
-      window.onload = displayCurrentDate;
+      // Load tasks from local storage on page load
+      function loadTasks() {
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        tasks.forEach((task) => {
+          displayTask(task.text, task.time, task.completed);
+        });
+      }
 
-      function toggleCheck(element) {
-        element.classList.toggle("checked");
-        const status = element.querySelector(".status");
-        if (element.classList.contains("checked")) {
-          status.textContent = "✔";
-        } else {
-          status.textContent = "Taken";
+      // Save tasks to local storage
+      function saveTasks() {
+        const tasks = [];
+        const taskItems = document.querySelectorAll(".task-item");
+        taskItems.forEach((taskItem) => {
+          const taskText = taskItem
+            .querySelector("span")
+            .textContent.split(" (at ")[0];
+          const taskTime = taskItem
+            .querySelector("span")
+            .textContent.split(" (at ")[1]
+            .replace(")", "");
+          const completed = taskItem.classList.contains("completed");
+          tasks.push({ text: taskText, time: taskTime, completed });
+        });
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+
+      function displayTask(text, time, completed) {
+        const taskList = document.getElementById("taskList");
+        const taskItem = document.createElement("li");
+        taskItem.className = "task-item" + (completed ? " completed" : "");
+
+        const taskText = document.createElement("span");
+        taskText.textContent = `${text} (at ${time})`;
+        taskItem.appendChild(taskText);
+
+        const checkBtn = document.createElement("button");
+        checkBtn.innerHTML = "&#10003;";
+        checkBtn.onclick = () => {
+          taskItem.classList.toggle("completed");
+          saveTasks();
+        };
+        taskItem.appendChild(checkBtn);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "&#128465;";
+        deleteBtn.onclick = () => {
+          taskItem.remove();
+          saveTasks();
+        };
+        taskItem.appendChild(deleteBtn);
+
+        taskList.appendChild(taskItem);
+      }
+
+      // Function to add a new task
+      function addTask() {
+        const taskInput = document.getElementById("taskInput").value.trim();
+        const taskTime = document.getElementById("taskTime").value;
+        if (taskInput && taskTime) {
+          displayTask(taskInput, taskTime, false);
+          saveTasks();
+          document.getElementById("taskInput").value = "";
+          document.getElementById("taskTime").value = "";
         }
+      }
+
+      // Run functions on page load
+      window.onload = () => {
+        displayCurrentDate();
+        loadTasks();
+      };
+      // Get the current URL
+      const currentPage = window.location.pathname;
+
+      // Highlight the inventory button dynamically
+      if (currentPage.includes("inventory.html")) {
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          if (link.href.includes("inventory.html")) {
+            link.classList.add("active");
+          }
+        });
       }
     </script>
   </head>
@@ -218,17 +343,19 @@
           <h1 class="ms-3">Med Minder</h1>
         </div>
         <nav class="nav">
-          <a href="#" class="nav-item nav-link active">HOME</a>
-          <a href="#" class="nav-item nav-link">INVENTORY</a>
-          <a href="#" class="nav-item nav-link">HEALTH LOG</a>
+          <a href="afterlogin.html" class="nav-item nav-link active">HOME</a>
+          <a href="inventory.html" class="nav-item nav-link">INVENTORY</a>
+          <a href="healthlog.html" class="nav-item nav-link">HEALTH LOG</a>
         </nav>
       </div>
 
       <div class="content">
         <div class="card med-expiry">
-          <h1>MEDICINE</h1>
-          <h2>EXPIRY</h2>
-          <h1>DATES</h1>
+          <div>
+            <h1>MEDICINE</h1>
+            <h2>EXPIRY</h2>
+            <h1>DATES</h1>
+          </div>
           <div class="date-container">
             <div class="month"></div>
             <div class="day"></div>
@@ -243,34 +370,20 @@
 
       <div class="content">
         <div class="content2">
-          <div class="box">Box 1</div>
-          <div class="box">Box 3</div>
-          <div class="box">Box 2</div>
-          <div class="box">Box 4</div>
+          <div class="box box1">Box 1</div>
+          <div class="box box2">Box 3</div>
+          <div class="box box3">Box 2</div>
+          <div class="box box4">Box 4</div>
         </div>
 
-        <div class="card schedule">
+        <div class="task-container">
           <h2>Today's Schedule:</h2>
-          <div class="schedule-item" onclick="toggleCheck(this)">
-            <input type="text" placeholder="Medicine" value="Biogesic" />
-            <input type="time" value="09:00" />
-            <span class="status">Taken</span>
+          <div class="add-task-container">
+            <input type="text" id="taskInput" placeholder="Add medicine..." />
+            <input type="time" id="taskTime" />
+            <button onclick="addTask()">Save!</button>
           </div>
-          <div class="schedule-item" onclick="toggleCheck(this)">
-            <input type="text" placeholder="Medicine" value="Diatabs" />
-            <input type="time" value="09:00" />
-            <span class="status">Taken</span>
-          </div>
-          <div class="schedule-item" onclick="toggleCheck(this)">
-            <input type="text" placeholder="Medicine" value="Cetirizine" />
-            <input type="time" value="19:00" />
-            <span class="status">Taken</span>
-          </div>
-          <div class="schedule-item" onclick="toggleCheck(this)">
-            <input type="text" placeholder="Medicine" value="Vitamins" />
-            <input type="time" value="19:00" />
-            <span class="status">Taken</span>
-          </div>
+          <ul id="taskList" class="task-list"></ul>
         </div>
       </div>
     </div>
