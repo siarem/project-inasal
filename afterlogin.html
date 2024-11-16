@@ -94,6 +94,12 @@
       .med-expiry h2 {
         color: #f8e37e;
       }
+      .content2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 50%;
+      }
 
       .date-container {
         background-color: #146672;
@@ -146,14 +152,16 @@
       }
       .add-task-container input[type="text"] {
         padding: 10px;
-        font-size: 18px;
-        width: 200px;
+        font-size: 21px;
+        width: 400px;
         border: 2px solid #146672;
+        font-family: "Saira Condensed", sans-serif;
         border-radius: 5px;
       }
       .add-task-container input[type="time"] {
         padding: 10px;
-        font-size: 18px;
+        font-size: 21px;
+        font-family: "Saira Condensed", sans-serif;
         border: 2px solid #146672;
         border-radius: 5px;
       }
@@ -165,6 +173,7 @@
         font-family: "Saira Condensed", sans-serif;
         font-weight: bold;
         border-radius: 5px;
+        font-size: 17px;
         cursor: pointer;
       }
       h2 {
@@ -184,6 +193,7 @@
         padding: 10px;
         margin: 10px 0;
         border-radius: 5px;
+        font-size: 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -198,12 +208,6 @@
         color: white;
         cursor: pointer;
         font-size: 20px;
-      }
-      .content2 {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        width: 50%;
       }
       .box {
         background-color: #ffffff;
@@ -220,19 +224,19 @@
         width: 180px; /* Adjust width for Box 1 */
       }
 
-      .box2 {
+      .box3 {
         height: 180px; /* Adjust height for Box 2 */
-        width: 400px; /* Adjust width for Box 2 */
+        width: 350px; /* Adjust width for Box 2 */
       }
 
-      .box3 {
+      .box2 {
         height: 180px; /* Adjust height for Box 3 */
         width: 180px; /* Adjust width for Box 3 */
       }
 
       .box4 {
         height: 180px; /* Adjust height for Box 4 */
-        width: 400px; /* Adjust width for Box 4 */
+        width: 350px; /* Adjust width for Box 4 */
       }
     </style>
     <script>
@@ -371,8 +375,8 @@
       <div class="content">
         <div class="content2">
           <div class="box box1">Box 1</div>
-          <div class="box box2">Box 3</div>
-          <div class="box box3">Box 2</div>
+          <div class="box box3">Box 3</div>
+          <div class="box box2">Box 2</div>
           <div class="box box4">Box 4</div>
         </div>
 
