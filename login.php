@@ -1,29 +1,48 @@
 <?php
-include 'connect.php'; // Include database connection file
+// Database connection
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$database = "login_system"; 
 
-// Check if the form was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+$conn = new mysqli($servername, $username, $password, $database);
 
-    // Prepare and execute the SQL query to retrieve user details
-    $sql = "SELECT * FROM users WHERE username = '$username'";
-    $result = $conn->query($sql);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+// Ensure POST data is received
+if (isset($_POST['user_name']) && isset($_POST['password'])) {
+    $form_username = $_POST['user_name'];
+    $form_password = $_POST['password'];
+
+    // Query the database for the user
+    $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $form_username, $form_username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if the user exists
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-
+        
         // Verify the password
-        if (password_verify($password, $user['password'])) {
-            echo "Login successful!"; // Placeholder response
+        if (password_verify($form_password, $user['password'])) {
+            // Successful login
+            header("Location: afterlogin.html"); // Redirect to afterlogin.html
+            exit();
         } else {
-            echo "Incorrect password!";
+            echo "Invalid password";
         }
     } else {
-        echo "No user found with that username!";
+        echo "No user found with that username or email";
     }
 
-    // Close the database connection
+    // Close the connection
+    $stmt->close();
     $conn->close();
+} else {
+    echo "Please fill in both username and password";
 }
 ?>
