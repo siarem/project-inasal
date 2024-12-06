@@ -1,330 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Med Minder</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700&family=Saira+Condensed:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700&family=Saira+Condensed:wght@300&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-      body {
-        background-color: #a6dace;
-        font-family: "Saira Condensed", sans-serif;
-        font-weight: 700;
-      }
-      .header {
-        border-radius: 10px;
-        margin-top: 10px;
-        padding: 20px;
-        display: flex;
-        font-weight: 700;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .header img {
-        height: 50px;
-      }
-      .header h1 {
-        color: #ffffff;
-        font-weight: 1000;
-        letter-spacing: 2px;
-        font-family: "Saira Condensed", sans-serif;
-      }
-      .nav-link {
-        color: #f8e37e;
-        font-family: "Saira Condensed", sans-serif;
-        margin-right: 10px;
-        font-size: 25px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        padding: 10px;
-        background-color: #ffffff;
-        border-radius: 30px;
-        transition: background-color 0.3s ease;
-      }
-      .nav-link:hover {
-        background-color: #f8e37e; /* The background color when hovered */
-        color: #ffffff; /* The text color when hovered */
-      }
-      .nav-link.active {
-        background-color: #f8e37e;
-        color: #ffffff;
-      }
-      /* Custom styles for the form layout */
-      .container-form {
-        background-color: #ffffff;
-        border: 2px solid #146672;
-        padding: 20px;
-        border-radius: 15px;
-        margin-top: 20px;
-      }
-      .section-title {
-        font-weight: 700;
-        font-size: 18px;
-        color: #a6dace;
-      }
-      .form-group {
-        margin-bottom: 15px;
-      }
-      .form-label {
-        font-size: 14px;
-        font-weight: 700;
-        color: #146672;
-      }
-      .form-input {
-        background-color: #a6dace;
-        border-radius: 10px;
-
-        border: none;
-        padding: 10px;
-        border: 2px solid #146672;
-      }
-      .custom-save-button {
-        background-color: #a6dace; /* Your desired background color */
-        color: #146672; /* Your desired text color */
-        border: none; /* Remove border if not needed */
-        border-radius: 5px; /* Optional: change border radius */
-        padding: 10px 20px; /* Optional: change padding */
-        font-weight: 700; /* Optional: make the text bold */
-      }
-
-      .custom-save-button:hover {
-        background-color: #146672; /* Hover color */
-      }
+        body {
+            background-color: #a6dace;
+            font-family: "Saira Condensed", sans-serif;
+            font-weight: 700;
+        }
+        .header {
+            border-radius: 10px;
+            margin-top: 10px;
+            padding: 20px;
+            display: flex;
+            font-weight: 700;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header img {
+            height: 50px;
+        }
+        .header h1 {
+            color: #ffffff;
+            font-weight: 1000;
+            letter-spacing: 2px;
+            font-family: "Saira Condensed", sans-serif;
+        }
+        .nav-link {
+            color: #f8e37e;
+            font-family: "Saira Condensed", sans-serif;
+            margin-right: 10px;
+            font-size: 25px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-link:hover {
+            background-color: #f8e37e; /* The background color when hovered */
+            color: #ffffff; /* The text color when hovered */
+        }
+        .nav-link.active {
+            background-color: #f8e37e;
+            color: #ffffff;
+        }
+        /* Custom styles for the form layout */
+        .container-form {
+            background-color: #ffffff;
+            border: 2px solid #146672;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        .section-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #a6dace;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #146672;
+        }
+        .form-input {
+            background-color: #a6dace;
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+            border: 2px solid #146672;
+        }
+        .custom-save-button {
+            background-color: #a6dace; /* Your desired background color */
+            color: #146672; /* Your desired text color */
+            border: none; /* Remove border if not needed */
+            border-radius: 5px; /* Optional: change border radius */
+            padding: 10px 20px; /* Optional: change padding */
+            font-weight: 700; /* Optional: make the text bold */
+        }
+        .custom-save-button:hover {
+            background-color: #146672; /* Hover color */
+            color: #ffffff; /* Hover text color */
+        }
     </style>
     <script>
-      // Corrected script for highlighting active link
-      window.onload = function () {
-        const currentPage = window.location.pathname.split("/").pop();
-        document.querySelectorAll(".nav-link").forEach((link) => {
-          if (link.getAttribute("href") === currentPage) {
-            link.classList.add("active");
-          } else {
-            link.classList.remove("active");
-          }
-        });
-      };
+        // Highlight active link based on current page
+        window.onload = function () {
+            const currentPage = window.location.pathname.split("/").pop();
+            document.querySelectorAll(".nav-link").forEach((link) => {
+                if (link.getAttribute("href") === currentPage) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+            // Display saved data on page load
+            displayData();
+        };
 
-      // Save data to localStorage
-      function saveData() {
-        localStorage.setItem("name", document.getElementById("name").value);
-        localStorage.setItem(
-          "birthdate",
-          document.getElementById("birthdate").value
-        );
-        localStorage.setItem(
-          "medicalId",
-          document.getElementById("medicalId").value
-        );
-        localStorage.setItem(
-          "lastRecord",
-          document.getElementById("lastRecord").value
-        );
-        localStorage.setItem(
-          "contactNumber",
-          document.getElementById("contactNumber").value
-        );
-        localStorage.setItem(
-          "otherInfo",
-          document.getElementById("otherInfo").value
-        );
-        localStorage.setItem(
-          "comments",
-          document.getElementById("comments").value
-        );
-        localStorage.setItem(
-          "medName",
-          document.getElementById("medName").value
-        );
-        localStorage.setItem(
-          "description",
-          document.getElementById("description").value
-        );
-        localStorage.setItem(
-          "dosDonts",
-          document.getElementById("dosDonts").value
-        );
-        localStorage.setItem(
-          "weeklyGoals",
-          document.getElementById("weeklyGoals").value
-        );
-        localStorage.setItem(
-          "medication",
-          document.getElementById("medication").value
-        );
-        localStorage.setItem("dosage", document.getElementById("dosage").value);
-        localStorage.setItem(
-          "sideEffects",
-          document.getElementById("sideEffects").value
-        );
-        localStorage.setItem(
-          "longTermGoals",
-          document.getElementById("longTermGoals").value
-        );
-        alert("Data saved!");
-      }
+        // Save data to localStorage and update display
+        function saveData() {
+            console.log("Saving data..."); // Debug output
+            const formData = {
+                name: document.getElementById("name").value,
+                birthdate: document.getElementById("birthdate").value,
+                medicalId: document.getElementById("medicalId").value,
+                lastRecord: document.getElementById("lastRecord").value,
+                contactNumber: document.getElementById("contactNumber").value,
+                otherInfo: document.getElementById("otherInfo").value,
+                comments: document.getElementById("comments").value,
+                medName: document.getElementById("medName").value,
+                description: document.getElementById("description").value,
+                dosDonts: document.getElementById("dosDonts").value,
+                weeklyGoals: document.getElementById("weeklyGoals").value,
+                medication: document.getElementById("medication").value,
+                dosage: document.getElementById("dosage").value,
+                sideEffects: document.getElementById("sideEffects").value,
+                longTermGoals: document.getElementById("longTermGoals").value
+            };
+            localStorage.setItem("healthLogData", JSON.stringify(formData));
+            displayData();
+            alert("Data saved!");
+        }
+
+        // Display saved data from localStorage
+        function displayData() {
+            console.log("Displaying data..."); // Debug output
+            const formData = JSON.parse(localStorage.getItem("healthLogData"));
+            if (formData) {
+                document.getElementById("name").value = formData.name;
+                document.getElementById("birthdate").value = formData.birthdate;
+                document.getElementById("medicalId").value = formData.medicalId;
+                document.getElementById("lastRecord").value = formData.lastRecord;
+                document.getElementById("contactNumber").value = formData.contactNumber;
+                document.getElementById("otherInfo").value = formData.otherInfo;
+                document.getElementById("comments").value = formData.comments;
+                document.getElementById("medName").value = formData.medName;
+                document.getElementById("description").value = formData.description;
+                document.getElementById("dosDonts").value = formData.dosDonts;
+                document.getElementById("weeklyGoals").value = formData.weeklyGoals;
+                document.getElementById("medication").value = formData.medication;
+                document.getElementById("dosage").value = formData.dosage;
+                document.getElementById("sideEffects").value = formData.sideEffects;
+                document.getElementById("longTermGoals").value = formData.longTermGoals;
+            }
+        }
     </script>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <div class="header">
-        <div class="d-flex align-items-center">
-          <img src="logo.png" alt="Med Minder Logo" />
-          <h1 class="ms-3">Med Minder</h1>
+        <div class="header">
+            <div class="d-flex align-items-center">
+                <img src="logo.png" alt="Med Minder Logo" />
+                <h1 class="ms-3">Med Minder</h1>
+            </div>
+            <nav class="nav">
+                <a href="afterlogin.html" class="nav-item nav-link">HOME</a>
+                <a href="inventory.html" class="nav-item nav-link">INVENTORY</a>
+                <a href="healthlog.html" class="nav-item nav-link">HEALTH LOG</a>
+            </nav>
         </div>
-        <nav class="nav">
-          <a href="afterlogin.html" class="nav-item nav-link">HOME</a>
-          <a href="inventory.html" class="nav-item nav-link">INVENTORY</a>
-          <a href="healthlog.html" class="nav-item nav-link">HEALTH LOG</a>
-        </nav>
-      </div>
 
-      <div class="container-form mt-4">
-        <div class="row">
-          <!-- Left Section -->
-          <div class="col-md-4">
-            <div class="form-group">
-              <label class="form-label">Name:</label>
-              <input type="text" class="form-control form-input" id="name" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Birthdate:</label>
-              <input
-                type="date"
-                class="form-control form-input"
-                id="birthdate"
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Medical ID:</label>
-              <input
-                type="text"
-                class="form-control form-input"
-                id="medicalId"
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Date of Last Record:</label>
-              <input
-                type="date"
-                class="form-control form-input"
-                id="lastRecord"
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Contact Number:</label>
-              <input
-                type="tel"
-                class="form-control form-input"
-                id="contactNumber"
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Other Information:</label>
-              <textarea
-                class="form-control form-input"
-                id="otherInfo"
-                rows="2"
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Comments:</label>
-              <textarea
-                class="form-control form-input"
-                id="comments"
-                rows="3"
-              ></textarea>
-            </div>
-          </div>
-
-          <!-- Right Section -->
-          <div class="col-md-8">
+        <div class="container-form mt-4">
             <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-label">Medicine Name</label>
-                  <input
-                    type="text"
-                    class="form-control form-input"
-                    id="medName"
-                  />
+                <!-- Left Section -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label">Name:</label>
+                        <input type="text" class="form-control form-input" id="name" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Birthdate:</label>
+                        <input type="date" class="form-control form-input" id="birthdate" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Medical ID:</label>
+                        <input type="text" class="form-control form-input" id="medicalId" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date of Last Record:</label>
+                        <input type="date" class="form-control form-input" id="lastRecord" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contact Number:</label>
+                        <input type="tel" class="form-control form-input" id="contactNumber" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Other Information:</label>
+                        <textarea class="form-control form-input" id="otherInfo" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Comments:</label>
+                        <textarea class="form-control form-input" id="comments" rows="3"></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Description</label>
-                  <textarea
-                    class="form-control form-input"
-                    id="description"
-                    rows="2"
-                  ></textarea>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Do's and Don'ts</label>
-                  <textarea
-                    class="form-control form-input"
-                    id="dosDonts"
-                    rows="3"
-                  ></textarea>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Goals for the Week:</label>
-                  <textarea
-                    class="form-control form-input"
-                    id="weeklyGoals"
-                    rows="2"
-                  ></textarea>
-                </div>
+
+                <!-- Right Section -->
+                <!-- Right Section -->
+                <div class="col-md-8">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label class="form-label">Medicine Name</label>
+                              <input type="text" class="form-control form-input" id="medName" />
+                          </div>
+                          <div class="form-group">
+                              <label class="form-label">Description</label>
+                              <textarea class="form-control form-input" id="description" rows="2"></textarea>
+                          </div>
+                          <div class="form-group">
+                              <label class="form-label">Do's and Don'ts</label>
+                              <textarea class="form-control form-input" id="dosDonts" rows="3"></textarea>
+                          </div>
+                          <div class="form-group">
+                              <label class="form-label">Goals for the Week:</label>
+                              <textarea class="form-control form-input" id="weeklyGoals" rows="2"></textarea>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label class="form-label">Medication</label>
+                              <input type="text" class="form-control form-input" id="medication" />
+                          </div>
+                          <div class="form-group">
+                              <label class="form-label">Dosage</label>
+                              <input type="text" class="form-control form-input" id="dosage" />
+                          </div>
+                          <div class="form-group">
+                              <label class="form-label">Effects/Side Effects</label>
+                              <textarea class="form-control form-input" id="sideEffects" rows="3"></textarea>
+                          </div>
+                          <div class="form-group">
+                              <label class="form-label">Long Term Goals</label>
+                              <textarea class="form-control form-input" id="longTermGoals" rows="2"></textarea>
+                          </div>
+                      </div>
+                  </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-label">Medication</label>
-                  <input
-                    type="text"
-                    class="form-control form-input"
-                    id="medication"
-                  />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Dosage</label>
-                  <input
-                    type="text"
-                    class="form-control form-input"
-                    id="dosage"
-                  />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Effects/Side Effects</label>
-                  <textarea
-                    class="form-control form-input"
-                    id="sideEffects"
-                    rows="3"
-                  ></textarea>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Long Term Goals</label>
-                  <textarea
-                    class="form-control form-input"
-                    id="longTermGoals"
-                    rows="2"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-        <button
-          class="btn btn-primary mt-3 custom-save-button"
-          onclick="saveData()"
-        >
-          Save
-        </button>
+          <button class="btn btn-primary mt-3 custom-save-button" onclick="saveData()">Save</button>
       </div>
-    </div>
-  </body>
+  </div>
+</body>
 </html>

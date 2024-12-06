@@ -385,16 +385,16 @@
         const dateContainer = document.querySelector(".date-container");
         const monthElement = dateContainer.querySelector(".month");
         const dayElement = dateContainer.querySelector(".day");
-
+    
         const today = new Date();
         const options = { month: "long" };
         const month = new Intl.DateTimeFormat("en-US", options).format(today);
         const day = today.getDate();
-
+    
         monthElement.textContent = month.toUpperCase();
         dayElement.textContent = day;
       }
-
+    
       // Load tasks from local storage on page load
       function loadTasks() {
         const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -402,7 +402,7 @@
           displayTask(task.text, task.time, task.completed);
         });
       }
-
+    
       // Save tasks to local storage
       function saveTasks() {
         const tasks = [];
@@ -420,16 +420,16 @@
         });
         localStorage.setItem("tasks", JSON.stringify(tasks));
       }
-
+    
       function displayTask(text, time, completed) {
         const taskList = document.getElementById("taskList");
         const taskItem = document.createElement("li");
         taskItem.className = "task-item" + (completed ? " completed" : "");
-
+    
         const taskText = document.createElement("span");
         taskText.textContent = `${text} (at ${time})`;
         taskItem.appendChild(taskText);
-
+    
         const checkBtn = document.createElement("button");
         checkBtn.innerHTML = "&#10003;";
         checkBtn.onclick = () => {
@@ -437,7 +437,7 @@
           saveTasks();
         };
         taskItem.appendChild(checkBtn);
-
+    
         const deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = "&#128465;";
         deleteBtn.onclick = () => {
@@ -445,10 +445,10 @@
           saveTasks();
         };
         taskItem.appendChild(deleteBtn);
-
+    
         taskList.appendChild(taskItem);
       }
-
+    
       // Function to add a new task
       function addTask() {
         const taskInput = document.getElementById("taskInput").value.trim();
@@ -460,114 +460,125 @@
           document.getElementById("taskTime").value = "";
         }
       }
-
+    
       // Fetch medicines from the server
       function loadMedicines() {
-        fetch("get_medicines.php")
-          .then((response) => response.json())
-          .then((medicines) => {
-            medicines.forEach((medicine) => addMedicineToList(medicine));
+        fetch('get_medicines.php')
+          .then(response => response.json())
+          .then(medicines => {
+            medicines.forEach(medicine => addMedicineToList(medicine));
             updateUpcomingExpirations();
           });
       }
-
+    
       // Add a medicine to the DOM
       function addMedicineToList(medicine) {
         const expiryDate = new Date(medicine.expiry_date);
         const today = new Date();
-        const daysLeft = Math.ceil(
-          (expiryDate - today) / (1000 * 60 * 60 * 24)
-        );
-
-        let statusClass = "";
-        let statusText = "";
-
+        const daysLeft = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+    
+        let statusClass = '';
+        let statusText = '';
+    
         if (daysLeft < 0) {
-          statusClass = "expired";
-          statusText = "Expired";
+          statusClass = 'expired';
+          statusText = 'Expired';
         } else if (daysLeft <= 7) {
-          statusClass = "warning";
-          statusText = "Expiring Soon";
+          statusClass = 'warning';
+          statusText = 'Expiring Soon';
         } else {
-          statusClass = "safe";
-          statusText = "Safe";
+          statusClass = 'safe';
+          statusText = 'Safe';
         }
-
-        const listItem = document.createElement("li");
+    
+        const listItem = document.createElement('li');
         listItem.innerHTML = `
-            <span class="name">${medicine.name}</span> 
-            (<span class="quantity">${medicine.quantity}</span>)
-            <span class="expiry" data-expiry="${medicine.expiry_date}"> - 
-              <span class="status ${statusClass}">${statusText}</span>
-            </span>
-            <button class="delete-btn" onclick="deleteMedicine(this)">Delete</button>
-          `;
+          <span class="name">${medicine.name}</span> 
+          (<span class="quantity">${medicine.quantity}</span>)
+          <span class="expiry" data-expiry="${medicine.expiry_date}"> - 
+            <span class="status ${statusClass}">${statusText}</span>
+          </span>
+          <button class="delete-btn" onclick="deleteMedicine(${medicine.id}, this)">Delete</button>
+        `;
         document.getElementById("medicine-list").appendChild(listItem);
       }
-
+    
       // Delete a medicine
-      function deleteMedicine(button) {
-        const li = button.parentElement;
-        li.remove();
-        saveMedicines();
+      function deleteMedicine(id, button) {
+        fetch('delete_medicine.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({ id })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            const li = button.parentElement;
+            li.remove();
+            updateUpcomingExpirations();
+          } else {
+            alert("Error: " + data.message);
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
       }
-
+    
       // Update the Upcoming Expirations box
       function updateUpcomingExpirations() {
-        const upcomingExpirationsList = document.getElementById(
-          "upcoming-expirations-list"
-        );
-        upcomingExpirationsList.innerHTML = ""; // Clear the list
+        const upcomingExpirationsList = document.getElementById("upcoming-expirations-list");
+        upcomingExpirationsList.innerHTML = ''; // Clear the list
         const today = new Date();
-        fetch("get_medicines.php")
-          .then((response) => response.json())
-          .then((medicines) => {
-            medicines.forEach((medicine) => {
+        fetch('get_medicines.php')
+          .then(response => response.json())
+          .then(medicines => {
+            medicines.forEach(medicine => {
               const expiryDate = new Date(medicine.expiry_date);
-              const daysLeft = Math.ceil(
-                (expiryDate - today) / (1000 * 60 * 60 * 24)
-              );
-
+              const daysLeft = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+    
               if (daysLeft > 0 && daysLeft <= 7) {
-                const listItem = document.createElement("li");
+                const listItem = document.createElement('li');
                 listItem.textContent = `${medicine.name} is expiring in ${daysLeft} day(s).`;
                 upcomingExpirationsList.appendChild(listItem);
               }
             });
           });
       }
-
+    
       // Handle form submission
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", function() {
         const form = document.querySelector("form");
-        form.addEventListener("submit", function (event) {
+        form.addEventListener("submit", function(event) {
           event.preventDefault();
           const formData = new FormData(form);
-          fetch("add_medicine.php", {
-            method: "POST",
-            body: formData,
+          fetch('add_medicine.php', {
+            method: 'POST',
+            body: formData
           })
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.status === "success") {
-                addMedicineToList(data.medicine);
-                updateUpcomingExpirations();
-                form.reset(); // Clear the form after submission
-              } else {
-                alert("Error: " + data.message);
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === "success") {
+              addMedicineToList(data.medicine);
+              updateUpcomingExpirations();
+              form.reset(); // Clear the form after submission
+            } else {
+              alert("Error: " + data.message);
+            }
+          })
+          .catch(error => {
+            console.error("Error:", error);
+          });
         });
-
-        // Initial loading of data
-        displayCurrentDate();
-        loadTasks();
-        loadMedicines();
-      });
-    </script>
+    
+        // Initial loading of data    // Initial loading of data
+    displayCurrentDate();
+    loadTasks();
+    loadMedicines();
+  });
+</script>
   </head>
   <body>
     <div class="container">
