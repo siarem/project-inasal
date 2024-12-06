@@ -49,6 +49,10 @@
         border-radius: 30px;
         transition: background-color 0.3s ease;
       }
+      .nav-link:hover {
+        background-color: #f8e37e; /* The background color when hovered */
+        color: #ffffff; /* The text color when hovered */
+      }
       .nav-link.active {
         background-color: #f8e37e;
         color: #ffffff;
@@ -59,6 +63,26 @@
         background-position: cover;
         min-height: 100vh; /* Full viewport height */
         padding-top: 30px; /* Space below header */
+      }
+      .day-shelf {
+        background-color: #ffffff;
+        border: 2px solid #146672;
+        border-radius: 5px;
+        margin: 10px 0;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 700;
+        color: #146672;
+      }
+      .day-name {
+        flex: 0 0 100px; /* Fixed width for the day name */
+        text-align: left;
+      }
+      .day-content {
+        flex: 1;
+        padding-left: 10px; /* Space between the name and the content */
       }
     </style>
   </head>
@@ -78,9 +102,35 @@
 
       <!-- Main Content Section with Background Image -->
       <div class="content-background">
-        <!-- Your main content goes here -->
-        <h2 class="text-white text-center">Monday burat</h2>
-        <!-- Add more elements as needed for the schedule or other content -->
+        <!-- Shelves for each day of the week -->
+        <div class="day-shelf">
+          <div class="day-name">Monday</div>
+          <div class="day-content"></div>
+        </div>
+        <div class="day-shelf">
+          <div class="day-name">Tuesday</div>
+          <div class="day-content"></div>
+        </div>
+        <div class="day-shelf">
+          <div class="day-name">Wednesday</div>
+          <div class="day-content"></div>
+        </div>
+        <div class="day-shelf">
+          <div class="day-name">Thursday</div>
+          <div class="day-content"></div>
+        </div>
+        <div class="day-shelf">
+          <div class="day-name">Friday</div>
+          <div class="day-content"></div>
+        </div>
+        <div class="day-shelf">
+          <div class="day-name">Saturday</div>
+          <div class="day-content"></div>
+        </div>
+        <div class="day-shelf">
+          <div class="day-name">Sunday</div>
+          <div class="day-content"></div>
+        </div>
       </div>
     </div>
 

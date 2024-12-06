@@ -49,6 +49,10 @@
         border-radius: 30px;
         transition: background-color 0.3s ease;
       }
+      .nav-link:hover {
+        background-color: #f8e37e; /* The background color when hovered */
+        color: #ffffff; /* The text color when hovered */
+      }
       .nav-link.active {
         background-color: #f8e37e;
         color: #ffffff;
@@ -56,6 +60,7 @@
       /* Custom styles for the form layout */
       .container-form {
         background-color: #ffffff;
+        border: 2px solid #146672;
         padding: 20px;
         border-radius: 15px;
         margin-top: 20px;
@@ -76,8 +81,22 @@
       .form-input {
         background-color: #a6dace;
         border-radius: 10px;
+
         border: none;
         padding: 10px;
+        border: 2px solid #146672;
+      }
+      .custom-save-button {
+        background-color: #a6dace; /* Your desired background color */
+        color: #146672; /* Your desired text color */
+        border: none; /* Remove border if not needed */
+        border-radius: 5px; /* Optional: change border radius */
+        padding: 10px 20px; /* Optional: change padding */
+        font-weight: 700; /* Optional: make the text bold */
+      }
+
+      .custom-save-button:hover {
+        background-color: #146672; /* Hover color */
       }
     </style>
     <script>
@@ -230,7 +249,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-label">Name</label>
+                  <label class="form-label">Medicine Name</label>
                   <input
                     type="text"
                     class="form-control form-input"
@@ -262,7 +281,6 @@
                   ></textarea>
                 </div>
               </div>
-
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Medication</label>
@@ -300,7 +318,12 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary mt-3" onclick="saveData()">Save</button>
+        <button
+          class="btn btn-primary mt-3 custom-save-button"
+          onclick="saveData()"
+        >
+          Save
+        </button>
       </div>
     </div>
   </body>
